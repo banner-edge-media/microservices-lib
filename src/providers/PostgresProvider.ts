@@ -7,7 +7,7 @@ export default class PostgresProvider {
     static async connect(connectionString: string) {
         this.pool = new Pool({
             connectionString,
-            ssl: connectionString.includes("ondigitalocean") ? {
+            ssl: connectionString.includes("ondigitalocean") || connectionString.includes("amazon") ? {
                 rejectUnauthorized: false
             } : undefined
         })
