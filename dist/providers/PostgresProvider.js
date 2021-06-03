@@ -15,7 +15,7 @@ class PostgresProvider {
         return __awaiter(this, void 0, void 0, function* () {
             this.pool = new pg_1.Pool({
                 connectionString,
-                ssl: connectionString.includes("ondigitalocean") ? {
+                ssl: connectionString.includes("ondigitalocean") || connectionString.includes("amazon") ? {
                     rejectUnauthorized: false
                 } : undefined
             });
