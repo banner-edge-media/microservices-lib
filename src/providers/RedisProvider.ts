@@ -6,7 +6,9 @@ export default class RedisProvider {
     static redis;
     private static getAsync;
     static connect(redisUri: string) {
-        this.redis = Redis.createClient(redisUri, {tls: redisUri.includes("ondigitalocean")});
+        this.redis = Redis.createClient(redisUri, {
+            tls: redisUri.includes("ondigitalocean") || redisUri.includes("aws")
+        });
         this.getAsync = promisify(this.redis.get).bind(this.redis);
     }
 
