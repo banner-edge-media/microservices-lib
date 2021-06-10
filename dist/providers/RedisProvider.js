@@ -13,7 +13,11 @@ const Redis = require("redis");
 const { promisify } = require("util");
 class RedisProvider {
     static connect(redisUri) {
-        this.redis = Redis.createClient(redisUri, { tls: redisUri.includes("ondigitalocean") });
+        this.redis = Redis.createClient(redisUri, {
+            tls: {
+                rejectUnauthorized: false
+            }
+        });
         this.getAsync = promisify(this.redis.get).bind(this.redis);
     }
     static get(key) {
